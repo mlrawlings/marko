@@ -1,0 +1,13 @@
+<if(true) x=1>
+    That's an extra attribute. It shouldn't be there.
+</if>
+<else-if(true) attr=data.attr>
+    Nor this attribute.
+</else-if>
+<else a="b">
+    Nor this attribute.
+</else>
+
+<unless(true) hello="world">
+    Nor this attribute.
+</unless>

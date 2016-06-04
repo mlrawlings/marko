@@ -1,7 +1,7 @@
 module.exports = function codeGenerator(elNode, generator) {
     var attributes = elNode.attributes;
 
-    if (!attributes) {
+    if (!attributes.length) {
         generator.addError('Invalid <assign> tag. Argument is missing. Example; <assign x=123 />');
         return elNode;
     }

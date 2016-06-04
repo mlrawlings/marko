@@ -6,7 +6,7 @@ module.exports = function nodeFactory(el, context) {
 
     var argument = el.argument;
     if (argument) {
-        context.addError(elseStatement, 'Invalid <else> tag. Argument is not allowed');
+        context.addError(elseStatement, 'Invalid <else> tag. Argument is not allowed.');
     }
 
     if (el.hasAttribute('if')) {

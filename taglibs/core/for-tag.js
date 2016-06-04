@@ -14,7 +14,7 @@ module.exports = function codeGenerator(elNode, codegen) {
         return loopNode;
     } catch(e) {
         if (e.code === 'INVALID_FOR') {
-            codegen.addError(e.message);
+            codegen.addError(e.message.replace(/^Invalid/, '<for> tag has an invalid'));
         } else {
             throw e;
         }

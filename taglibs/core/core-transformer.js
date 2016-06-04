@@ -7,6 +7,7 @@ var coreAttrHandlers = [
         'while', function(attr, node) {
             var whileArgument = attr.argument;
             if (!whileArgument) {
+                this.addError('Invalid while attribute. Argument is missing. Example: <'+node.tagName+' while(foo)>');
                 return false;
             }
 
@@ -18,6 +19,7 @@ var coreAttrHandlers = [
         'for', function(attr, node) {
             var forArgument = attr.argument;
             if (!forArgument) {
+                // no error here.  ex. <label for="name">Your Name</label>
                 return false;
             }
 
@@ -27,7 +29,7 @@ var coreAttrHandlers = [
                 loopNode = createLoopNode(forArgument, null, this.builder);
             } catch(e) {
                 if (e.code === 'INVALID_FOR') {
-                    this.addError(e.message);
+                    this.addError(e.message.replace(/^Invalid/, 'for attribute has an invalid'));
                     return;
                 } else {
                     throw e;
@@ -45,6 +47,7 @@ var coreAttrHandlers = [
         'if', function(attr, node) {
             var ifArgument = attr.argument;
             if (!ifArgument) {
+                this.addError('Invalid if attribute. Argument is missing. Example: <'+node.tagName+' if(foo === true)>');
                 return false;
             }
 
@@ -65,6 +68,7 @@ var coreAttrHandlers = [
         'unless', function(attr, node) {
             var ifArgument = attr.argument;
             if (!ifArgument) {
+                this.addError('Invalid unless attribute. Argument is missing. Example: <'+node.tagName+' unless(foo === true)>');
                 return false;
             }
 
@@ -86,6 +90,7 @@ var coreAttrHandlers = [
         'else-if', function(attr, node) {
             var elseIfArgument = attr.argument;
             if (!elseIfArgument) {
+                this.addError('Invalid else-if attribute. Argument is missing. Example: <'+node.tagName+' else-if(foo === true)>');
                 return false;
             }
 
@@ -113,6 +118,7 @@ var coreAttrHandlers = [
         'body-only-if', function(attr, node, el) {
             var argument = attr.argument;
             if (!argument) {
+                this.addError('Invalid body-only-if attribute. Argument is missing. Example: <'+node.tagName+' body-only-if(foo === true)>');
                 return false;
             }
 

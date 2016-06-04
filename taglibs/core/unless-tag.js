@@ -10,7 +10,7 @@ module.exports = function nodeFactory(elNode, context) {
 
     if (attributes.length) {
         context.addError(elNode, 'Invalid <unless> tag. Attributes not allowed.');
-        return;
+        return elNode;
     }
 
     var builder = context.builder;
