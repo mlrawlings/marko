@@ -6,6 +6,7 @@ var fs = require('fs');
 module.exports = function codeGenerator(el, codegen) {
     let argument = el.argument;
     if (!argument) {
+        codegen.addError('Invalid <include-text> tag. Argument is missing. Example: <include-text("./foo.txt")/>');
         return;
     }
 
