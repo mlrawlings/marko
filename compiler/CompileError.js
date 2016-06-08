@@ -1,5 +1,7 @@
 'use strict';
 
+const HtmlElement = require('./ast/HtmlElement');
+
 class CompileError {
     constructor(errorInfo, context) {
         this.context = context;
@@ -31,13 +33,21 @@ class CompileError {
     }
 
     toString() {
-        var pos = this.pos;
-        if (pos) {
-            pos = '[' + pos + '] ';
-        } else {
-            pos = '';
+        var pos = this.pos || '';
+        if(pos) {
+            pos = ''+this.pos+'] ';
         }
-        var str = pos + this.message;
+
+        var node = this.node;
+        if(!node) {
+            node = '';
+        } else if (node instanceof HtmlElement) {
+            node = 'Invalid <'+node.tagName+'> tag. ';
+        } else {
+            node = 'Invalid ' + node.type + ' node. ';
+        }
+
+        var str = pos + node + this.message;
         if (pos == null && this.node) {
             str += ' (' + this.node.toString() + ')';
         }
